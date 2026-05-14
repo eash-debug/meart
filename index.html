@@ -687,4 +687,239 @@
         }
         .stream-btn:hover { border-color: currentColor; }
         .stream-btn.spotify { color: #1db954; }
-        
+        .stream-btn.apple  { color: #fc3c44; }
+        .stream-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-logo">N<span>—</span>JANG</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#music">Music</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-status">
+            <div class="status-dot"></div>
+            Available for collabs
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-marquee-bg">N-JANG &nbsp; ENJANG ASHARI &nbsp; N-JANG &nbsp; ENJANG ASHARI &nbsp; N-JANG &nbsp; ENJANG ASHARI &nbsp;</div>
+
+        <div class="hero-tag">Bedroom Producer & Artist</div>
+        <h1 class="hero-name">
+            N—JANG<br>
+            <span class="italic">Ashari</span>
+        </h1>
+
+        <div class="hero-bottom">
+            <p class="hero-desc">
+                Alternative music from the bedroom.<br>
+                Hip-Hop. Drill. Hyperpop. Whatever feels right.
+            </p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-num">6</div>
+                    <div class="stat-label">Releases</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">4</div>
+                    <div class="stat-label">Genres</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-hint">
+            <div class="scroll-line"></div>
+            Scroll
+        </div>
+    </section>
+
+    <!-- MUSIC -->
+    <section id="music">
+        <div class="section-header fade-up">
+            <div>
+                <div class="section-label">Discography</div>
+                <h2 class="section-title">My Music</h2>
+            </div>
+            <div class="section-count">06</div>
+        </div>
+
+        <div class="music-grid" id="musicGrid">
+            <!-- injected by JS -->
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="about-left fade-up">
+            <div class="big-letter">N<br>J</div>
+        </div>
+        <div class="about-right fade-up">
+            <div class="section-label">About</div>
+            <h2 class="section-title" style="margin-bottom:2rem;">Who<br>I Am</h2>
+            <p class="about-bio">
+                <strong>Enjang Ashari</strong>, known as N-Jang, is a bedroom musician and producer from Indonesia. He works across genres — Hip-Hop, Drill, Hyperpop, Alternative Rap — whatever the idea calls for.<br><br>
+                His music is built in the bedroom, away from the noise. He also produces for other artists, taking each project as its own thing.
+            </p>
+            <div class="tags">
+                <span class="tag">Hip-Hop</span>
+                <span class="tag">Drill</span>
+                <span class="tag">Hyperpop</span>
+                <span class="tag">Alt Rap</span>
+                <span class="tag">Producer</span>
+                <span class="tag">Bedroom</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="contact-inner">
+            <h2 class="contact-headline fade-up">
+                Let's<br><em>Work</em><br>Together
+            </h2>
+            <div class="contact-links fade-up">
+                <a href="https://www.instagram.com/njangvshr" target="_blank" class="contact-link">
+                    <div>
+                        <div class="link-label">Instagram</div>
+                        <div class="link-value">@njangvshr</div>
+                    </div>
+                    <div class="link-arrow">↗</div>
+                </a>
+                <a href="mailto:njangmusic@gmail.com" class="contact-link">
+                    <div>
+                        <div class="link-label">Email</div>
+                        <div class="link-value">njangmusic@gmail.com</div>
+                    </div>
+                    <div class="link-arrow">↗</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-copy">© 2026 Enjang "N-Jang" Ashari</div>
+        <div class="footer-made">Made with <span>♥</span> & a lot of late nights</div>
+    </footer>
+
+    <script>
+        // Custom cursor
+        const cursor = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            cursor.style.left = mx - 5 + 'px';
+            cursor.style.top = my - 5 + 'px';
+        });
+        function animateRing() {
+            rx += (mx - rx - 18) * 0.12;
+            ry += (my - ry - 18) * 0.12;
+            cursorRing.style.left = rx + 'px';
+            cursorRing.style.top = ry + 'px';
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(3)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        });
+
+        // Mobile nav
+        const toggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        // ---- MUSIC CARDS ----
+        const releases = [
+            { num:'01', year:'2025', title:'Lost Angel',      genre:'Hip-Hop',
+              spotify:'https://open.spotify.com/album/1Ts2yTuEHpuf3fld4uHd6D',
+              apple:'https://music.apple.com/us/album/lost-angel-single/1844424600',
+              bg:'linear-gradient(135deg,#1a1a2e,#0f3460)' },
+            { num:'02', year:'2025', title:'Play Like This',  genre:'Hip-Hop / Rap',
+              spotify:'https://open.spotify.com/album/2WQyhR6tNrPmtCQJEX8ebJ',
+              apple:'https://music.apple.com/us/album/play-like-this-single/1830503342',
+              bg:'linear-gradient(135deg,#2d1b00,#8b5e00)' },
+            { num:'03', year:'2025', title:'Trojans',         genre:'Alternative Rap',
+              spotify:'https://open.spotify.com/album/7CYtf6tnIoQzJI30R6ln0X',
+              apple:'https://music.apple.com/us/album/trojans-single/1823713521',
+              bg:'linear-gradient(135deg,#0d2818,#0a3d1f)' },
+            { num:'04', year:'2024', title:'Angel',           genre:'Hip-Hop / Drill',
+              spotify:'https://open.spotify.com/album/0vaNwRJDPbgzFGKHme1ky5',
+              apple:'https://music.apple.com/us/album/angel-feat-klein-single/1740138276',
+              bg:'linear-gradient(135deg,#1a0a2e,#2d1060)' },
+            { num:'05', year:'2023', title:'Datura',          genre:'Hip-Hop / Rap',
+              spotify:'https://open.spotify.com/album/3iOluV6PjP3jS1Vdc8pZAD',
+              apple:'https://music.apple.com/us/album/datura/1780958471?i=1780958472',
+              bg:'linear-gradient(135deg,#2a0a0a,#5c1010)' },
+            { num:'06', year:'2023', title:'Good at Goodbyes',genre:'Hyperpop',
+              spotify:'https://open.spotify.com/album/2tAzHz8lkHX0Y5BuJWyH5O',
+              apple:'https://music.apple.com/us/album/good-at-goodbyes-single/1720708557',
+              bg:'linear-gradient(135deg,#0a1a2e,#102040)' },
+        ];
+
+        const spotifySVG = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>`;
+        const appleSVG   = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>`;
+
+        const grid = document.getElementById('musicGrid');
+        releases.forEach((r, i) => {
+            const card = document.createElement('div');
+            card.className = 'music-card fade-up';
+            const appleBtn = r.apple
+                ? `<a href="${r.apple}" target="_blank" class="stream-btn apple">${appleSVG} Apple Music</a>`
+                : '';
+            card.innerHTML = `
+                <div class="card-num">${r.num} / 06 · ${r.year}</div>
+                <div class="card-title">${r.title}</div>
+                <div class="card-genre">${r.genre}</div>
+                <div class="cover-wrap" style="background:${r.bg};" id="cover-${i}">
+                    <div class="cover-fallback">${r.title.toUpperCase()}</div>
+                </div>
+                <div class="stream-btns">
+                    <a href="${r.spotify}" target="_blank" class="stream-btn spotify">${spotifySVG} Spotify</a>
+                    ${appleBtn}
+                </div>`;
+            grid.appendChild(card);
+
+            // Load cover art via Spotify oEmbed (works on deployed sites)
+            fetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(r.spotify)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.thumbnail_url) return;
+                    const wrap = document.getElementById(`cover-${i}`);
+                    const img = document.createElement('img');
+                    img.src = data.thumbnail_url;
+                    img.alt = r.title + ' cover art';
+                    wrap.appendChild(img);
+                })
+                .catch(() => {/* fallback gradient tetap tampil */});
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
